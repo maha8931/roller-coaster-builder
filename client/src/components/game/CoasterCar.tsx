@@ -39,20 +39,20 @@ export function CoasterCar() {
         <boxGeometry args={[0.8, 0.3, 0.6]} />
         <meshStandardMaterial color="#333333" />
       </mesh>
-      <mesh position={[-0.5, -0.35, 0.6]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} rotation={[Math.PI / 2, 0, 0]} />
+      <mesh position={[-0.5, -0.35, 0.6]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
         <meshStandardMaterial color="#222222" metalness={0.8} />
       </mesh>
-      <mesh position={[0.5, -0.35, 0.6]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} rotation={[Math.PI / 2, 0, 0]} />
+      <mesh position={[0.5, -0.35, 0.6]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
         <meshStandardMaterial color="#222222" metalness={0.8} />
       </mesh>
-      <mesh position={[-0.5, -0.35, -0.6]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} rotation={[Math.PI / 2, 0, 0]} />
+      <mesh position={[-0.5, -0.35, -0.6]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
         <meshStandardMaterial color="#222222" metalness={0.8} />
       </mesh>
-      <mesh position={[0.5, -0.35, -0.6]}>
-        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} rotation={[Math.PI / 2, 0, 0]} />
+      <mesh position={[0.5, -0.35, -0.6]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
         <meshStandardMaterial color="#222222" metalness={0.8} />
       </mesh>
     </group>
