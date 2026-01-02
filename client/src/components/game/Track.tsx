@@ -86,39 +86,25 @@ export function Track() {
       const loopInfo = getLoopMetaAt(t);
       
       if (loopInfo && loopInfo.meta) {
-        // Use reference frame from loop metadata - orientation based on ideal circle
+        // Use PURE reference frame from loop metadata - no orthogonalization against actual tangent
         const meta = loopInfo.meta;
         const theta = loopInfo.theta;
         
-        // Loop center is at entryPos + up * radius
-        const loopCenter = meta.entryPos.clone().addScaledVector(meta.up, meta.radius);
-        
-        // True inward radial: from point toward center (ignoring lateral corkscrew offset)
-        // Ideal point position on circle: center + (-sin(θ)*forward - cos(θ)*up) * radius
-        // But simpler: radial pointing inward = -sin(θ)*forward + cos(θ)*up
-        const radialInward = new THREE.Vector3()
+        // Inward radial pointing toward loop center: -sin(θ)*forward + cos(θ)*up
+        // At θ=0: up (correct - pointing up at entry)
+        // At θ=π/2: -forward (pointing back toward center)
+        // At θ=π: -up (pointing down at top)
+        // At θ=3π/2: forward (pointing forward toward center)
+        up = new THREE.Vector3()
           .addScaledVector(meta.forward, -Math.sin(theta))
           .addScaledVector(meta.up, Math.cos(theta))
           .normalize();
         
-        // "Up" for the track is the inward radial direction
-        up = radialInward.clone();
-        
-        // Normal (sideways) is the right vector - constant throughout the loop
+        // Normal (sideways) is always the right vector - constant throughout the loop
         normal = meta.right.clone();
         
-        // Ensure orthogonality with actual tangent (the helical path may differ slightly)
-        const upDot = up.dot(tangent);
-        up.sub(tangent.clone().multiplyScalar(upDot));
-        if (up.length() > 0.01) {
-          up.normalize();
-        } else {
-          // Fallback if degenerate
-          up = radialInward.clone();
-        }
-        
-        // Re-derive normal from tangent x up to ensure orthogonal frame
-        normal = new THREE.Vector3().crossVectors(tangent, up).normalize();
+        // DO NOT orthogonalize against actual tangent - use pure reference frame
+        // This prevents the helical offset from affecting orientation
         
         prevUp.copy(up);
         prevTangent.copy(tangent);
