@@ -32,12 +32,7 @@ export function CoasterCar() {
     meshRef.current.rotation.x = pitch;
   });
   
-  // Hide the cart entirely during first-person ride view
-  // The rider is sitting in the cart, so they shouldn't see it
-  if (mode === "ride") return null;
-  
-  // Show cart in build mode when not riding
-  if (!isRiding) return null;
+  if (!isRiding || mode !== "ride") return null;
   
   return (
     <group ref={meshRef}>
