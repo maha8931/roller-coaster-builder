@@ -182,6 +182,45 @@ export const useRollerCoaster = create<RollerCoasterState>((set, get) => ({
         });
       }
       
+      // Add exit easing points past theta=2π to prevent pinch at bottom
+      // These gradually flatten the curve as it returns to horizontal
+      const numEasePoints = 5;
+      const easeOutQuad = (x: number) => 1 - (1 - x) * (1 - x);
+      
+      for (let i = 1; i <= numEasePoints; i++) {
+        const t = i / numEasePoints; // 0 to 1 through easing
+        const easedT = easeOutQuad(t);
+        
+        // Continue theta slightly past 2π with decaying amplitude
+        const theta = Math.PI * 2 + t * Math.PI * 0.3;
+        const decayFactor = 1 - easedT; // Decays from 1 to 0
+        
+        const forwardOffset = Math.sin(theta) * loopRadius * decayFactor;
+        const verticalOffset = (1 - Math.cos(theta)) * loopRadius * decayFactor;
+        
+        // Lateral stays at max, forward movement increases
+        const lateralOffset = helixSeparation;
+        const exitForward = easedT * 4; // Move forward as we exit
+        
+        loopPoints.push({
+          id: `point-${++pointCounter}`,
+          position: new THREE.Vector3(
+            entryPos.x + forward.x * (forwardOffset + exitForward) + right.x * lateralOffset,
+            entryPos.y + verticalOffset,
+            entryPos.z + forward.z * (forwardOffset + exitForward) + right.z * lateralOffset
+          ),
+          tilt: 0,
+          loopMeta: {
+            entryPos: entryPos.clone(),
+            forward: forward.clone(),
+            up: up.clone(),
+            right: right.clone(),
+            radius: loopRadius,
+            theta: Math.PI * 2 // Keep orientation at 2π for exit
+          }
+        });
+      }
+      
       // Simple linear interpolation - let Catmull-Rom handle the smoothing naturally
       // Just like how manually placed points work
       const transitionPoints: TrackPoint[] = [];
