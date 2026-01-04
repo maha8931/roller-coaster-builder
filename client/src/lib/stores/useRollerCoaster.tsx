@@ -183,24 +183,31 @@ export const useRollerCoaster = create<RollerCoasterState>((set, get) => ({
       // Add exit easing points past theta=2π with decaying curvature
       // This mirrors how the entry smoothly blends into the loop
       const loopExitPos = loopPoints[loopPoints.length - 1].position.clone();
-      const maxExitTheta = Math.PI * 0.3; // How far past 2π to extend
+      const maxExitTheta = Math.PI * 0.5; // Extended range for smoother exit
+      const numExitPoints = 9; // More points for smoother curve
       
-      for (let i = 1; i <= exitEasePoints; i++) {
-        const t = i / exitEasePoints; // 0 to 1 through exit
-        const easeT = 1 - Math.pow(1 - t, 2); // EaseOutQuad
+      // Easing functions
+      const easeOutCubic = (x: number) => 1 - Math.pow(1 - x, 3);
+      const easeInOutCubic = (x: number) => x < 0.5 
+        ? 4 * x * x * x 
+        : 1 - Math.pow(-2 * x + 2, 3) / 2;
+      
+      for (let i = 1; i <= numExitPoints; i++) {
+        const t = i / numExitPoints; // 0 to 1 through exit
+        const easedT = easeOutCubic(t); // Gentler cubic easing
         
         // Theta continues past 2π but with decaying radius
         const theta = Math.PI * 2 + t * maxExitTheta;
-        const decayingRadius = loopRadius * (1 - easeT); // Radius shrinks to 0
+        const decayingRadius = loopRadius * (1 - easedT); // Radius shrinks to 0
         
         const forwardOffset = Math.sin(theta) * decayingRadius;
         const verticalOffset = (1 - Math.cos(theta)) * decayingRadius;
         
-        // Lateral offset stays at max (helixSeparation) as we exit
-        const lateralOffset = helixSeparation;
+        // Lateral offset also decays back toward center using same easing
+        const lateralOffset = helixSeparation * (1 - easedT * 0.3); // Slight decay
         
-        // Also move forward to create exit trajectory
-        const exitForward = t * 6; // Move forward as we exit
+        // Forward movement with easeInOut for smooth acceleration
+        const exitForward = easeInOutCubic(t) * 8;
         
         loopPoints.push({
           id: `point-${++pointCounter}`,
