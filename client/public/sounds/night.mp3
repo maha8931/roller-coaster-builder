@@ -1,0 +1,97 @@
+Delivered-To: mahathir.sarker@student.tdsb.on.ca
+Received: by 2002:a05:7000:1d95:b0:656:7133:3b8a with SMTP id hp21csp506007mab;
+        Thu, 1 May 2025 16:57:00 -0700 (PDT)
+X-Received: by 2002:a17:906:a14f:b0:ad1:7858:a74c with SMTP id a640c23a62f3a-ad17ad760b4mr76882466b.22.1746143820648;
+        Thu, 01 May 2025 16:57:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1746143820; cv=none;
+        d=google.com; s=arc-20240605;
+        b=MLFxdrm0khfZCrbqfh+LG2A9nuWwqQ5HWFMoYtdnzhUkMSl2k8IKZcSvj4TD4NF4SM
+         VG8zNeXQtVBhFeQIiW4POwYQgXh014m9/w+3tCuCBoVZ9830bopuVVuisMoFvn9zfU3o
+         KBTnoLgbk6TqLdlU5xJKALrhHlH23lWFDOecMK1ZczH+vyKUDxcfjIEFLb6Ry+PTV/bZ
+         DQU2VwvbVkH/sPZPe4DN/0UkZJW+OhbyxeyjIl1xR+EfSsQV74iKqGq57Y4kuONST78E
+         7B+ump3nPVgn5t56SBp9Ztk/01mFLt4hZJ6z97HNWdQ0Y5vQgVu9cqRPVRn2dH7VfVM3
+         edDw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=W0Pnf9Ike4saxOZHOYBgy1DYu136eXWE5wopXJfvZR4=;
+        fh=r7tJITJJMghj6LjetSDmCdR0zeYzbi+HdbhPkY1Vejk=;
+        b=Ly/5AlNqZDmC1RUW8V170Q8D82XKeDawgfrIxjesSCVU5qkjJx5BSuBDBw8hyOi5Tt
+         otalzfe/O1nT9OQpfSGEgq37yMwyI7LjeZdw0+joQZ7viXRUEKimjd/nYJXT8mY66j7Z
+         +n0faAWTs0/bwS90PAcBWPQc2pziiZLm7aAdN1E18bIHpcK8hyGp40qooNzvCL+0Raiz
+         Q2q79VLiH6HJOc96gt4LefymIUsm81TLykE0SswzqYyam5/qBIIfCzZld8f6IrImWDLd
+         3pqhTO23hb/hoxU7LlDsAS4blGK3+Y5YSVixa+hNR968oxNod6zsSJS5v92+Gijm/P9q
+         TVDQ==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@student.tdsb.on.ca header.s=google header.b=xTpO6Pbf;
+       spf=pass (google.com: domain of danial.shahid@student.tdsb.on.ca designates 209.85.220.41 as permitted sender) smtp.mailfrom=danial.shahid@student.tdsb.on.ca;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=student.tdsb.on.ca;
+       dara=neutral header.i=@student.tdsb.on.ca
+Return-Path: <danial.shahid@student.tdsb.on.ca>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id 4fb4d7f45d1cf-5f92fb9c31fsor529162a12.0.2025.05.01.16.57.00
+        for <mahathir.sarker@student.tdsb.on.ca>
+        (Google Transport Security);
+        Thu, 01 May 2025 16:57:00 -0700 (PDT)
+Received-SPF: pass (google.com: domain of danial.shahid@student.tdsb.on.ca designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@student.tdsb.on.ca header.s=google header.b=xTpO6Pbf;
+       spf=pass (google.com: domain of danial.shahid@student.tdsb.on.ca designates 209.85.220.41 as permitted sender) smtp.mailfrom=danial.shahid@student.tdsb.on.ca;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=student.tdsb.on.ca;
+       dara=neutral header.i=@student.tdsb.on.ca
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=student.tdsb.on.ca; s=google; t=1746143820; x=1746748620; darn=student.tdsb.on.ca;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=W0Pnf9Ike4saxOZHOYBgy1DYu136eXWE5wopXJfvZR4=;
+        b=xTpO6PbfeJRpKU22HRp5RrXECFh+PCGs2puo/urcI+/9M995RXJQ2Byqjwr10a8Ww/
+         iEO8pI3XWXQFSw8nh/2Ym2F0wtWPG2I7nejV5Ob1neQVmQ0bum5NyDBmuF/fBzf/dI6F
+         fPgdlQuN8Xdm4wd0Wzwkg4tGnDYCeTpQOMKw4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746143820; x=1746748620;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=W0Pnf9Ike4saxOZHOYBgy1DYu136eXWE5wopXJfvZR4=;
+        b=lGkuivMbIk0LFIK6wL/HN4vsKkrBQHaqDaNXMqwFwkQo1NVE9GEAep40Fq4exuF/sg
+         hRnQM+WIXkLfeAWsLddd0vpxUPDv+h2AxXBna8BqHivAV7blrtPZKWCKB0yDqaDpwviV
+         jLRfTwc/c7l98tvTwe+MIxPhamkmxZOd1bCQ6tP0GIJ/Niv6jNcGUiZg+Wfi68sF7I7v
+         WuGy9awtSE+25z51crCe5j7FZ7tXK1J/h+Nt3/Y9L7MZWtAm0KSM/NuFHE6HH55X+auD
+         UFigWYffC/qvjJWLYUxtcWU+VzTFycTxu4+wb7kdV6dI2Epet6y0gJzSQM4SpdspSb5H
+         XWTQ==
+X-Gm-Message-State: AOJu0YxGYcE9ZvmzMLRitkzb+lXliYWTGr3HyONb2T/IvvU7Tooz920f
+	ZDevkISNei+AE2eYjMpx7h4eZ4wXkB+xd1m2J/eF0nCT1Vv/POzB9X0Tpqhy9KXnkeZ5BqqoebJ
+	AV6zS81UygvTTvaqrg0pAbPVfy5pcdbwrufi7bXxpKdNuBynZsuk=
+X-Gm-Gg: ASbGncv24kDWWjF5QogUhvrciFlJI5WwN8Zw5az8w9b3+cbW43J8HtjhF0QZjY0WLMw
+	vk55qLseFG0E/2zot6jfpXFqGbjAOByOAJYkpv3+QCf0vMpVwIO+XDTd2GQy47zRmBwjcJ6Awv5
+	19A1E3TaQ/sodgLfH6yvD4
+X-Google-Smtp-Source: AGHT+IHNVSxdE1WjyS6SyaBQOjGwTvXh8jNo61TQiiPeZt/6daOE/e4HI/FdURkVXtSYJn/1+p4AKG4VLKBq303ptEM=
+X-Received: by 2002:a05:6402:518b:b0:5f6:23b1:ab47 with SMTP id
+ 4fb4d7f45d1cf-5fa788e5351mr494045a12.26.1746143819786; Thu, 01 May 2025
+ 16:56:59 -0700 (PDT)
+MIME-Version: 1.0
+From: "Shahid, Danial" <danial.shahid@student.tdsb.on.ca>
+Date: Thu, 1 May 2025 19:56:49 -0400
+X-Gm-Features: ATxdqUFFoUVz54tz_N_Bs-Dbw5tC3bwn4ooM7mZQjMpg7WL_cI00ZOVzei3tBjQ
+Message-ID: <CABxZiaAgh4XUGF2zLhS2-Armjj_K56zZ4K5v3RgqWpdkw3mj=A@mail.gmail.com>
+Subject: 
+To: mahathir.sarker@student.tdsb.on.ca, mustafa.raiyan@student.tdsb.on.ca
+Content-Type: multipart/alternative; boundary="0000000000001afdbc06341bcade"
+
+--0000000000001afdbc06341bcade
+Content-Type: text/plain; charset="UTF-8"
+
+https://app.filmora.io/#/object/d0a0k1nign2kdtpch6g0?source=%7B%22product_id%22:%221901%22,%22product_page%22:%22share_url%22,%22product_version%22:%2214.4.13.12098%22%7D
+
+--0000000000001afdbc06341bcade
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><a href=3D"https://app.filmora.io/#/objec=
+t/d0a0k1nign2kdtpch6g0?source=3D%7B%22product_id%22:%221901%22,%22product_p=
+age%22:%22share_url%22,%22product_version%22:%2214.4.13.12098%22%7D" target=
+=3D"_blank">https://app.filmora.io/#/object/d0a0k1nign2kdtpch6g0?source=3D%=
+7B%22product_id%22:%221901%22,%22product_page%22:%22share_url%22,%22product=
+_version%22:%2214.4.13.12098%22%7D</a></div>
+</div>
+
+--0000000000001afdbc06341bcade--
